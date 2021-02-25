@@ -1,29 +1,33 @@
-import {Component} from 'react';
-import {Container, Table} from 'react-bootstrap'
+import React,{Component} from 'react';
+import Container from 'react-bootstrap/Container'
+import Table from 'react-bootstrap/Table'
 
 /*
-    Currently, this component is passed data from a JSON file for the purpose of rendering a table.
-    Included is a sample getData call to show how this file would grab JSON data from an API before 
-    running the getKeys, getHeader, and getRowsData functions. 
+    Prompt: Given JSON data such as this list of dogs(in other screenshot), create
+    a page in React or Angular that displays the data in an organized table. The 
+    page should be able to talk to a Node or PHP API and I can use any CSS framework
+    to create the table (here I have ReactBootstrap)
 */
 
 class TableComponent extends Component {
 
-    getKeys(){
-        return Object.keys(this.props.data[0])
+    state = {
+        dogs: []
     }
-    getHeader(){
-        var keys = this.getKeys();
-        return keys.map((key, index)=>{
-            return <th key={key}>{key.toUpperCase()}</th>
-        })
+
+    // fetch list from API and save it into component state
+    async fetchData(){
+        try{
+            let response = await fetch(`http://localhost:8080`)
+            let data = await response.json()
+            this.setState({ dogs: data})
+        } catch(e){
+            console.log(e);
+        }     
     }
-    getRowsData(){
-        var items = this.props.data;
-        var keys = this.getKeys();
-        return items.map((row, index)=>{
-        return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
-        })
+
+    componentDidMount(){
+        this.fetchData()
     }
 
     render(){
@@ -32,21 +36,29 @@ class TableComponent extends Component {
                 <h2>Dogs:</h2>
                 <Table striped bordered hover>
                     <thead>
-                        <tr>{this.getHeader()}</tr>
+                        <tr>
+                            <td>Name</td>
+                            <td>Breed</td>
+                            <td>Weight</td>
+                            <td>Sex</td>
+                        </tr>
                     </thead>
                     <tbody>
-                        {this.getRowsData()}
+                        {this.state.dogs.map(dog => {
+                            return <>
+                                <tr>
+                                    <td>{dog.name}</td>
+                                    <td>{dog.breed}</td>
+                                    <td>{dog.Weight}</td>
+                                    <td>{dog.sex}</td>
+                                </tr>    
+                            </>
+                        })}
                     </tbody>
                 </Table>
             </Container>
         )
     }
-}
-
-const RenderRow = (props) => {
-    return props.keys.map((key, index)=>{
-        return <td key={props.data[key]}>{props.data[key]}</td>
-        })
 }
 
 export default TableComponent
