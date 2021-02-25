@@ -1,0 +1,33 @@
+[
+    { 
+        "name": "Rookie",
+        "breed": "Beagle",
+        "Weight": "5lb",
+        "sex": "M"
+    },
+    {
+        "name": "Lucy",
+        "breed": "Chihuahua",
+        "Weight": "7lb",
+        "sex": "F"
+    },
+    {
+        "name": "Dakota",
+        "breed": "Malamute",
+        "Weight": "85lb",
+        "sex": "M"
+    },
+    {
+        "name": "Rory",
+        "breed": "Blue-nosed Pitbull",
+        "Weight": "65lb",
+        "sex": "M"
+    },
+    {
+        "name": "Cheech",
+        "breed": "Pomeranian",
+        "Weight": "20lb",
+        "sex": "M"
+    }
+
+  ]
