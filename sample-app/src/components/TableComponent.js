@@ -2,15 +2,9 @@ import React,{Component} from 'react';
 import Container from 'react-bootstrap/Container'
 import Table from 'react-bootstrap/Table'
 
-/*
-    Prompt: Given JSON data such as this list of dogs(in other screenshot), create
-    a page in React or Angular that displays the data in an organized table. The 
-    page should be able to talk to a Node or PHP API and I can use any CSS framework
-    to create the table (here I have ReactBootstrap)
-*/
-
 class TableComponent extends Component {
 
+    // declare empty dogs array to store API data in
     state = {
         dogs: []
     }
@@ -26,15 +20,15 @@ class TableComponent extends Component {
         }     
     }
 
+    // when component mounts, data will be fetched from API
     componentDidMount(){
         this.fetchData()
     }
 
     render(){
-        console.log(this.state.dogs);
         return(
             <Container>
-                <h2>Dogs:</h2>
+                <h3>Table of data from Node API:</h3>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
@@ -45,6 +39,7 @@ class TableComponent extends Component {
                         </tr>
                     </thead>
                     <tbody>
+                        {/* map the data inside of state to the corresponding columns in table */}
                         {this.state.dogs.map(dog => {
                             return <>
                                 <tr>
