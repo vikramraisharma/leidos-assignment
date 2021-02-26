@@ -31,6 +31,7 @@ class TableComponent extends Component {
     }
 
     render(){
+        console.log(this.state.dogs);
         return(
             <Container>
                 <h2>Dogs:</h2>
